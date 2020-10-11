@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
-
+Route::resource('roles', 'RoleController');
 Route::get('/', 'HomeController@index')->name('home');
 Route::resource('usuarios', 'UserController');
+

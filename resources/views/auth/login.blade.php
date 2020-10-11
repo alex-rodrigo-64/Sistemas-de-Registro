@@ -64,6 +64,7 @@
                                 @endif
                             </div>
                         </div>
+                        //<a href="{{url('/register')}}" class="btn btn-success" >Registrar</a>
                     </form>
                 </div>
             </div>

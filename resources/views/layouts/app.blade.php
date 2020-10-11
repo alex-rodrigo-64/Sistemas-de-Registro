@@ -109,7 +109,16 @@
                                     </p>
                                 </a>
                             </li>
-
+                            <li class="nav-item">
+                                <a href={{url("roles")}}
+                                    class="{{ Request::path() === 'roles' ? 'nav-link active' : 'nav-link' }}">
+                                    <i class="nav-icon fas fa-users"></i>
+                                    <p>
+                                        Cargos
+                                      </p>
+                                </a>
+                            </li>
+                            
                       
                         </ul>
                     </nav>
