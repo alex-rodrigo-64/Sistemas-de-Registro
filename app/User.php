@@ -43,6 +43,14 @@ class User extends Authenticatable
     public function asignarRol($role){
         $this->roles()->sync($role,false);
     }
+
+    public function personal(){
+        return $this->belongsToMany(PersonalAcademico::class)->withTimestamps();
+    }
+    public function asignarPersonal($role){
+        $this->personal()->sync($role,false);
+    }
+
     public function tieneRol(){
         return $this->roles->flatten()->pluck('name')->unique();
     }

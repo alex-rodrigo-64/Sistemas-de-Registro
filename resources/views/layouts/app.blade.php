@@ -99,18 +99,18 @@
                             </li>
 
                             <li class="nav-item">
-                                <a href="usuarios"
-                                    class="{{ Request::path() === 'usuarios' ? 'nav-link active' : 'nav-link' }}">
+                                <a href="{{url('/personalAcademico')}}"
+                                    class="{{ Request::path() === 'personalAcademico' ? 'nav-link active' : 'nav-link' }}">
                                     <i class="nav-icon fas fa-users"></i>
                                     <p>
                                        Personal Academico
-                                        <?php use App\User; $users_count = User::all()->count(); ?>
-                                        <!--<span class="right badge badge-danger">{{ $users_count ?? '0' }}</span>-->
+                                        <?php  $personal_count = DB::table('personal_academicos')->count(); ?>
+                                       <span class="right badge badge-danger">{{ $personal_count ?? '0' }}</span>
                                     </p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href={{url("roles")}}
+                                <a href="{{url('roles')}}"
                                     class="{{ Request::path() === 'roles' ? 'nav-link active' : 'nav-link' }}">
                                     <i class="nav-icon fas fa-users"></i>
                                     <p>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRolesTable extends Migration
+class CreateRoles2sTable extends Migration
 {
     /**
      * Run the migrations.
@@ -20,8 +20,6 @@ class CreateRolesTable extends Migration
             $table->timestamps();
         });
         Schema::create('role_user', function (Blueprint $table) {
-            $table->primary('user_id','role_id');
-
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('role_id');
             $table->timestamps();
@@ -36,6 +34,8 @@ class CreateRolesTable extends Migration
             ->on('roles')
             ->onDelete('cascade');
         });
+
+        
     }
 
     /**

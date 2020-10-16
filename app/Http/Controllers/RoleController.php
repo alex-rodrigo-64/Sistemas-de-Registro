@@ -65,9 +65,12 @@ class RoleController extends Controller
      * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function edit(Role $role)
+    public function edit($id)
     {
         //
+       // $roles=Role::findOrFail($id);
+
+        //return view('roles.edit',compact('roles')); 
     }
 
     /**
@@ -77,9 +80,15 @@ class RoleController extends Controller
      * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $request, $id)
     {
         //
+        $role = Role::findOrFail($id);
+        $role->name= $request->get('name');
+        
+        $role->update();
+
+        return redirect('roles');
     }
 
     /**
@@ -88,8 +97,11 @@ class RoleController extends Controller
      * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
+    public function destroy($id)
     {
         //
+        $rol = Role::findOrFail($id);
+        $rol->delete();
+        return redirect('/roles');
     }
 }

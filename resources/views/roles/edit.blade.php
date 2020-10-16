@@ -1,10 +1,14 @@
-<button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#myModal"><i class="fas fa-plus"></i>
-</button>
+<a href="{{route('roles.edit',$role->id ?? '')}}" type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#myModal2{{$role->id ?? ''}}">
+    Editar
+</a>
 
-{!! Form::open(['url'=>'roles']) !!}
-{{Form::token()}}
+<form action="{{url('/roles/' . $role->id)}}" method="post" enctype="multipart/form-data">
 
-<div class="modal fade" id="myModal"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{csrf_field()}}
+    {{method_field('PATCH')}}
+    
+
+<div class="modal fade" id="myModal2{{$role->id ?? ''}}"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-Header">
@@ -15,8 +19,8 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Nombre del Rol:</label>
-                        <input id="recipient-name" class="form-control" type="text" name="name">
+                        <label for="recipient-name" class="col-form-label" >Editar Rol:</label>
+                        <input id="recipient-name" name="name" class="form-control" type="text" value="{{$role->name}}">
                     </div>
                 </form>
             </div>
@@ -28,4 +32,5 @@
     </div>
 </div>
 
-{!! Form::close() !!}
+</form>
+</div>

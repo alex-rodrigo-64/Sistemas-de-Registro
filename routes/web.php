@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
-Route::resource('roles', 'RoleController');
+Route::resource('roles', 'RoleController')->middleware('auth');
 Route::get('/', 'HomeController@index')->name('home');
 Route::resource('usuarios', 'UserController');
+Route::resource('personalAcademico', 'PersonalAcademicoController');
 
