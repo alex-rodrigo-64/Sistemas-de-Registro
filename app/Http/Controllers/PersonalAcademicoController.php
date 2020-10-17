@@ -96,7 +96,17 @@ class PersonalAcademicoController extends Controller
         $personal=PersonalAcademico::findOrFail($id);
         $roles=Role::all();
 
-        return view('personalAcademico.edit',compact('personal','roles')); 
+        $cargo = DB::table('personal_academicos')
+            ->join('personal_academico_user', 'personal_academicos.id', '=', 'personal_academico_user.personal_academico_id')
+            ->join('users', 'users.id', '=', 'personal_academico_user.user_id')
+            ->join('role_user', 'role_user.user_id', '=', 'users.id')
+            ->join('roles', 'roles.id', '=', 'role_user.role_id')
+            ->select('personal_academicos.*','users.name','users.email','users.password','roles.name')
+        ->where('personal_academicos.id','=',$id)->first();
+        
+            
+
+        return view('personalAcademico.edit',compact('personal','roles','cargo')); 
         
     }
 
@@ -121,8 +131,31 @@ class PersonalAcademicoController extends Controller
         
         $personal->update();
 
+        $persona = DB::table('personal_academicos')
+        ->join('personal_academico_user', 'personal_academicos.id', '=', 'personal_academico_user.personal_academico_id')
+        ->join('users', 'users.id', '=', 'personal_academico_user.user_id')
+        ->join('role_user', 'role_user.user_id', '=', 'users.id')
+        ->join('roles', 'roles.id', '=', 'role_user.role_id')
+        ->select('roles.id')
+        ->where('personal_academico_user.personal_academico_id','=',$id)->first();
 
+        $user = DB::table('personal_academicos')
+        ->join('personal_academico_user', 'personal_academicos.id', '=', 'personal_academico_user.personal_academico_id')
+        ->join('users', 'users.id', '=', 'personal_academico_user.user_id')
+        ->join('role_user', 'role_user.user_id', '=', 'users.id')
+        ->join('roles', 'roles.id', '=', 'role_user.role_id')
+        ->select('users.id')
+        ->where('personal_academico_user.personal_academico_id','=',$id)->first();
+        
+        $usuario = User::FindOrFail($user->id);
 
+        $usuario->name = request('nombre');
+        $usuario->email = request('email');
+        $usuario->password = bcrypt(request('password'));
+        
+        User::Find($user->id)->roles()->updateExistingPivot($persona->id,['role_id'=> $request->get('rol')]);
+
+        $usuario->update();
 
 
         return redirect('/personalAcademico');
@@ -136,6 +169,23 @@ class PersonalAcademicoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+
+        $user = DB::table('personal_academicos')
+        ->join('personal_academico_user', 'personal_academicos.id', '=', 'personal_academico_user.personal_academico_id')
+        ->join('users', 'users.id', '=', 'personal_academico_user.user_id')
+        ->join('role_user', 'role_user.user_id', '=', 'users.id')
+        ->join('roles', 'roles.id', '=', 'role_user.role_id')
+        ->select('users.id')
+        ->where('personal_academico_user.personal_academico_id','=',$id)->first();
+        
+        User::destroy($user->id);
+
+        PersonalAcademico::destroy($id);
+
+        //User::Find($user->id)->roles()->destroy();
+
+        
+        return redirect('/personalAcademico');
     }
 }

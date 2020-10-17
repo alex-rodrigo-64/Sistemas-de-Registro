@@ -40,7 +40,11 @@
             <select name="rol" class="form-control">
             <option selected disabled>Elige un rol para este Usuario</option>
             @foreach ($roles as $role)
+                @if ($role->name == $cargo->name)
+                <option value="{{$role->id}}" selected>{{$role->name}}</option>
+                @else
                 <option value="{{$role->id}}">{{$role->name}}</option>
+                @endif
             @endforeach
             </select>
         </div>

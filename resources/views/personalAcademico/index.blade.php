@@ -32,7 +32,7 @@
             <form method="post" action="{{url('/personalAcademico/'.$personal->id)}}" style="display:inline">
                 {{csrf_field()}}
                 {{method_field('DELETE')}}
-                <button type="submit" onclick="return confirm('¿Borrar?');" class="btn btn-danger float-right">Borrar</button>
+                <button type="submit" onclick="return confirm('¿Esta seguro de Eliminar este Usuario?');" class="btn btn-danger float-right">Borrar</button>
             </form> 
             
             <a href="{{url('/personalAcademico/'.$personal->id.'/edit')}}" class="btn btn-warning float-right">
