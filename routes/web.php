@@ -18,5 +18,5 @@ Auth::routes();
 Route::resource('roles', 'RoleController')->middleware('auth');
 Route::get('/', 'HomeController@index')->name('home');
 Route::resource('usuarios', 'UserController');
-Route::resource('personalAcademico', 'PersonalAcademicoController');
+Route::resource('personalAcademico', 'PersonalAcademicoController')->middleware('auth');;
 

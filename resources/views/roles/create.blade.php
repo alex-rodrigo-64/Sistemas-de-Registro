@@ -16,16 +16,20 @@
                 <form>
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Nombre del Rol:</label>
-                        <input id="recipient-name" class="form-control" type="text" name="name">
+                        <input id="recipient-name" class="form-control {{$errors->has('name')?'is-invalid':''}}" type="text" name="name">
+                    {!!  $errors->first('name','<div class="invalid-feedback">:message</div>') !!}
                     </div>
+                    
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button type="submit" class="btn btn-primary" >Guardar</button>
             </div>
         </div>
     </div>
 </div>
 
 {!! Form::close() !!}
+
+

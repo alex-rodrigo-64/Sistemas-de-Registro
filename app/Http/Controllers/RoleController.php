@@ -39,6 +39,13 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         //
+        $campos=[
+            'name'=>'required|string|max:100'
+        ];
+
+        $Mensaje = ["required"=>'Escriba un Rol'];
+        $this->validate($request,$campos,$Mensaje);
+
         $role = new Role();
         $role->name= request('name');
         
