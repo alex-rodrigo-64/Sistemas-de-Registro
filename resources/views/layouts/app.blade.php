@@ -97,18 +97,20 @@
                                     <p>Inicio</p>
                                 </a>
                             </li>
-
-                            <li class="nav-item">
+                            @Can('Administrador')
+                             <li class="nav-item">
                                 <a href="{{url('/personalAcademico')}}"
                                     class="{{ Request::path() === 'personalAcademico' ? 'nav-link active' : 'nav-link' }}">
                                     <i class="nav-icon fas fa-users"></i>
                                     <p>
-                                       Personal Academico
+                                       Registrar Personal Academico
                                         <?php  $personal_count = DB::table('personal_academicos')->count(); ?>
-                                       <span class="right badge badge-danger">{{ $personal_count ?? '0' }}</span>
+                                     <--<span class="right badge badge-danger">{{ $personal_count ?? '0' }}</span>-->
                                     </p>
                                 </a>
                             </li>
+                            
+                           
                             <li class="nav-item">
                                 <a href="{{url('roles')}}"
                                     class="{{ Request::path() === 'roles' ? 'nav-link active' : 'nav-link' }}">
@@ -118,7 +120,7 @@
                                       </p>
                                 </a>
                             </li>
-                            
+                            @endCan
                       
                         </ul>
                     </nav>
