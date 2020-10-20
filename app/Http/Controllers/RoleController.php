@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Role;
 use Illuminate\Http\Request;
 
-use App\User;
-
-class UserController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,13 +15,19 @@ class UserController extends Controller
     public function index()
     {
         //
-        $users= User::all();
-        return view('usuarios.index',['users' => $users]);
+        $roles = Role::all();
+        return view('roles.index',['roles'=>$roles]);
+
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
-        return view('usuarios.create');
+        //
     }
 
     /**
@@ -33,24 +38,30 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $usuario = new User();
+        //
+        $campos=[
+            'name'=>'required|string|max:100'
+        ];
 
-        $usuario->name = request('name');
-        $usuario->email = request('email');
-        $usuario->password = bcrypt(request('password'));
+        $Mensaje = ["required"=>'Escriba un Rol'];
+        $this->validate($request,$campos,$Mensaje);
+
+        $role = new Role();
+        $role->name= request('name');
         
-        $usuario->save();
+        $role->save();
 
-        return redirect('/usuarios');
+        return redirect('roles');
+        
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Role $role)
     {
         //
     }
@@ -58,34 +69,46 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         //
+       // $roles=Role::findOrFail($id);
+
+        //return view('roles.edit',compact('roles')); 
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         //
+        $role = Role::findOrFail($id);
+        $role->name= $request->get('name');
+        
+        $role->update();
+
+        return redirect('roles');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
+        $rol = Role::findOrFail($id);
+        $rol->delete();
+        return redirect('/roles');
     }
 }
