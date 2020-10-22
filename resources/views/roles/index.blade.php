@@ -9,7 +9,7 @@
         <h2>Roles
             @include('roles.create')
         </h2>
-
+         
 
             <table class="table table-hover">
                 <thead class="thead-light">
@@ -20,7 +20,7 @@
                 </thead>
                 <tbody>
                     @foreach ( $roles as $role)
-                    <tr>
+                    <tr>  
                         <td>{{$role->name}}</td>
                         <td>
                         @if ($role->name !='Administrador')
@@ -31,11 +31,11 @@
                         </form>
                             @include('roles.edit')
                         @endif
-
+                        
                     </td>
                     </tr>
                     @endforeach
-
+                    
                 </tbody>
             </table>
         </div>

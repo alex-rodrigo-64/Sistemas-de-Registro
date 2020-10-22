@@ -15,8 +15,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
-Route::resource('roles', 'RoleController')->middleware('auth');
+Route::resource('roles', 'RoleController');
+//->middleware('auth');
 Route::get('/', 'HomeController@index')->name('home');
 Route::resource('usuarios', 'UserController');
-Route::resource('personalAcademico', 'PersonalAcademicoController');
-Route::resource('formularioRegistros', 'FormularioRegistroController');
+Route::resource('personalAcademico', 'PersonalAcademicoController')->middleware('auth');
+
+Route::get('markAsRead', function(){
+    auth()->user()->unreadNotifications->markAsRead();
+    return redirect()->back();
+})->name('markAsRead');
+
+
+Route::resource('post', 'PostController');
+

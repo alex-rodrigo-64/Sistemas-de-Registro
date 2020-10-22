@@ -55,8 +55,9 @@ class User extends Authenticatable
         return $this->roles->flatten()->pluck('name')->unique();
     }
 
-    public function formularioRegistros(){
-        return $this->belongsToMany(FormularioRegistro::class)->withTimestamps();
+    public function posts()
+    {
+        return $this->hasMany('App\Post');
     }
 
 }

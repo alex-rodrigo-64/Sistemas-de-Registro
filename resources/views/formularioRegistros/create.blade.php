@@ -59,7 +59,7 @@
 
 
             <input type="submit" class="btn btn-success" >
-            <a href="{{url('/formularioRegistros')}}"class="btn btn-primary">Regresar</a>
+            <a href="{{url('/ formularioRegistros')}}"class="btn btn-primary">Regresar</a>
 
     </form>
 
