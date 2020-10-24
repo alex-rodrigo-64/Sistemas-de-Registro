@@ -43,6 +43,48 @@
                 <!-- Right navbar links -->
                 <ul class="navbar-nav ml-auto">
                    
+                    <!-- Usuario Dropdown Menu -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" data-toggle="dropdown" href="#">
+                            <i class="fas fa-user-alt"></i>
+                          
+                            <?php  
+                            $cargo = DB::table('personal_academicos')
+                                        ->join('personal_academico_user', 'personal_academicos.id', '=', 'personal_academico_user.personal_academico_id')
+                                        ->join('users', 'users.id', '=', 'personal_academico_user.user_id')
+                                        ->join('role_user', 'role_user.user_id', '=', 'users.id')
+                                        ->join('roles', 'roles.id', '=', 'role_user.role_id')
+                                        ->select('personal_academicos.*')
+                                        ->where('users.id','=',Auth::user()->id)->first();
+
+                            ?>
+                            <span >{{$cargo->nombre ?? Auth::user()->name}} {{ $cargo->apellido ?? " "}}</span>
+                          
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                            <div class="info">
+                                <a href="#" class="d-block">
+                                    @guest
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar Sesión') }}</a>
+                                    @else
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                               document.getElementById('logout-form').submit();">
+                                        Cerrar Sesión
+                                    </a>
+    
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        style="display: none;">
+                                        @csrf
+                                    </form>
+    
+                                    @endguest
+                                </a>
+                            </div>
+                        </div>
+
+                    </li>
+
                     <!-- Notifications Dropdown Menu -->
                     <li class="nav-item dropdown">
                         <a class="nav-link" data-toggle="dropdown" href="#">
@@ -105,30 +147,27 @@
                 <!-- Sidebar -->
                 <div class="sidebar">
                     <!-- Sidebar user panel (optional) -->
-                    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    @cannot('Administrador')
+                        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                        <!-- <div class="image">
                             <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                         </div>-->
-                        <div class="info">
-                            <a href="#" class="d-block">
-                                @guest
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar Sesión') }}</a>
-                                @else
-                                {{ Auth::user()->name }}
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                           document.getElementById('logout-form').submit();">
-                                    Cerrar Sesión
-                                </a>
+                        <a >
+                            <?php  
+                                $cargo = DB::table('personal_academicos')
+                                            ->join('personal_academico_user', 'personal_academicos.id', '=', 'personal_academico_user.personal_academico_id')
+                                            ->join('users', 'users.id', '=', 'personal_academico_user.user_id')
+                                            ->join('role_user', 'role_user.user_id', '=', 'users.id')
+                                            ->join('roles', 'roles.id', '=', 'role_user.role_id')
+                                            ->select('roles.*')
+                                            ->where('users.id','=',Auth::user()->id)->first();
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                    style="display: none;">
-                                    @csrf
-                                </form>
-
-                                @endguest
-                            </a>
-                        </div>
+                    ?>
+                    <span style="color:rgb(255, 255, 255)">{{$cargo->name}}</span>
+                        </a>
                     </div>
+                    @endcannot
+                    
 
                     <!-- Sidebar Menu -->
                     <nav class="mt-2">

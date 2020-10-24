@@ -15,7 +15,7 @@ class UserAdministradorSeeder extends Seeder
         //
         DB::table('users')->insert([
             'id' => '1000',
-            'name' => 'Administrator',
+            'name' => 'Administrador',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('laravel'), 
           ]);
