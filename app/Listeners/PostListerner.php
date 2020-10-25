@@ -56,7 +56,7 @@ class PostListerner
        $users = User::all();
        //Saturday
        //Monday
-       if($dia->isoFormat('dddd')=='Saturday')
+       if($dia->isoFormat('dddd')=='Monday')
         {
 
       
