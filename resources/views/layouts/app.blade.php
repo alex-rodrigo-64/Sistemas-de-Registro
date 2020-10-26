@@ -187,8 +187,7 @@
                                     <i class="nav-icon fas fa-users"></i>
                                     <p>
                                        Registrar Personal Academico
-                                        <?php  $personal_count = DB::table('personal_academicos')->count(); ?>
-                                     <--<span class="right badge badge-danger">{{ $personal_count ?? '0' }}</span>-->
+                                       
                                     </p>
                                 </a>
                             </li>

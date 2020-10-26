@@ -45,6 +45,37 @@ class PersonalAcademicoController extends Controller
      */
     public function store(Request $request)
     {
+        $campos=[
+            'nombre' => 'required|alpha|max:50',
+            'apellido' => 'required|alpha|max:50',
+            'codigoSis' => 'required|numeric|digits_between:9,10',
+            'email' => 'required|email:rfc,dns|max:30|unique:App\PersonalAcademico,email',
+            'telefono' => 'required|numeric|digits_between:7,8',
+            'password' => 'required|min:8|max:20',
+            'rol' => 'required',
+            
+        ];
+
+        $Mensaje = [
+                
+            "required"=>'El campo es requerido',
+            "rol.required"=>'Seleccione un cargo',
+            "nombre.alpha"=>'Solo se acepta caracteres A-Z',
+            "apellido.alpha"=>'Solo se acepta caracteres A-Z,chale',
+            "password.min"=>'Solo se acepta 8 caracteres como minimo',
+            "nombre.max"=>'Solo se acepta 50 caracteres como maximo',
+            "apellido.max"=>'Solo se acepta 50 caracteres como maximo',
+            "email.max"=>'Solo se acepta 30 caracteres como maximo',
+            "telefono.digits_between"=>'El numero no existe',
+            "codigoSis.digits_between"=>'El codigoSis no existe',
+            "password.max"=>'Solo se acepta 20 caracteres como maximo',
+            "numeric"=>'Solo se acepta números',
+            "unique"=>'Correo ya registrado',
+            "email"=>'El correo no existe',
+                   ];
+        $this->validate($request,$campos,$Mensaje);
+
+
         $personal = new PersonalAcademico();
 
         $personal->nombre = request('nombre');
@@ -93,6 +124,8 @@ class PersonalAcademicoController extends Controller
      */
     public function edit($id)
     {
+
+        
         $personal=PersonalAcademico::findOrFail($id);
         $roles=Role::all();
 
@@ -119,6 +152,33 @@ class PersonalAcademicoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $campos=[
+            'nombre' => 'required|alpha|max:50',
+            'apellido' => 'required|alpha|max:50',
+            'codigoSis' => 'required|numeric|digits_between:9,10',
+            'email' => 'required|email:rfc,dns|max:30',
+            'telefono' => 'required|numeric|digits_between:7,8',
+            'password' => 'min:8|max:20',
+        ];
+
+        $Mensaje = [
+                
+            "required"=>'El campo es requerido',
+            "nombre.alpha"=>'Solo se acepta caracteres A-Z',
+            "apellido.alpha"=>'Solo se acepta caracteres A-Z,chale',
+            "password.min"=>'Solo se acepta 8 caracteres como minimo',
+            "nombre.max"=>'Solo se acepta 50 caracteres como maximo',
+            "apellido.max"=>'Solo se acepta 50 caracteres como maximo',
+            "email.max"=>'Solo se acepta 30 caracteres como maximo',
+            "telefono.digits_between"=>'El numero no existe',
+            "codigoSis.digits_between"=>'El codigoSis no existe',
+            "password.max"=>'Solo se acepta 20 caracteres como maximo',
+            "numeric"=>'Solo se acepta números',
+            "email"=>'El correo no existe',
+                   ];
+        $this->validate($request,$campos,$Mensaje);
+
+
         //
         $personal = PersonalAcademico::FindOrFail($id);
 
