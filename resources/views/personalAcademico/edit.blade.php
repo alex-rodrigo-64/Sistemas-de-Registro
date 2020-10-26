@@ -7,7 +7,7 @@
     {{csrf_field()}}
     {{method_field('PATCH')}}
     <div class="col-md-11 mx-auto ">
-        <h3>FORMULARIO</h3>
+        <h3>EDITAR FORMULARIO</h3>
 
     <div class="row">
         <div class="col-5">
