@@ -4,8 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRoles2sTable extends Migration
+class CreateFormularioRegistrosTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -13,15 +14,23 @@ class CreateRoles2sTable extends Migration
      */
     public function up()
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('formulario_registros', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->date('fecha');
+            $table->time('hora');
+            $table->integer('grupo');
+            $table->string('materia');
+            $table->string('contenido');
+            $table->string('plataforma');
+            $table->string('observaciones');
             $table->string('label')->nullable();
+
             $table->timestamps();
         });
-        Schema::create('role_user', function (Blueprint $table) {
+
+        Schema::create('formulario_registro_user', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('role_id');
+            $table->unsignedBigInteger('formulario_registro_id');
             $table->timestamps();
 
             $table->foreign('user_id')
@@ -29,13 +38,11 @@ class CreateRoles2sTable extends Migration
             ->on('users')
             ->onDelete('cascade');
 
-            $table->foreign('role_id')
+            $table->foreign('formulario_registro_id')
             ->references('id')
-            ->on('roles')
+            ->on('formulario_registros')
             ->onDelete('cascade');
         });
-
-        
     }
 
     /**
@@ -45,6 +52,6 @@ class CreateRoles2sTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('formulario_registros');
     }
 }

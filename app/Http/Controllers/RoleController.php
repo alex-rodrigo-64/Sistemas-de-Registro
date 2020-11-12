@@ -40,10 +40,17 @@ class RoleController extends Controller
     {
         //
         $campos=[
-            'name'=>'required|string|max:100'
+            'name'=>'required|string|max:30|min:6|alpha|unique:App\Role,name'
         ];
 
-        $Mensaje = ["required"=>'Escriba un Rol'];
+        $Mensaje = [
+                
+            "required"=>'Escriba un Rol',
+            "alpha"=>'Solo se acepta caracteres A-Z',
+            "max"=>'Solo se acepta 30 caracteres como maximo',
+            "min"=>'Solo se acepta 6 caracteres como minimo',
+            "unique"=>'El Rol ya existe',
+                   ];
         $this->validate($request,$campos,$Mensaje);
 
         $role = new Role();

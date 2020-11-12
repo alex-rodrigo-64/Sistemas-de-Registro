@@ -54,7 +54,7 @@ class PostListerner
         //obtenemos el emial del administrador
        // $registro->email;
        $users = User::all();
-
+       //Saturday
        //Monday
        if($dia->isoFormat('dddd')=='Monday')
         {

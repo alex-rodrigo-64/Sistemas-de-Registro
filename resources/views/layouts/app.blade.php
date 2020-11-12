@@ -43,6 +43,65 @@
                 <!-- Right navbar links -->
                 <ul class="navbar-nav ml-auto">
                    
+                    <!-- Usuario Dropdown Menu -->
+                   
+                    <!--<li class="nav-item dropdown">
+                   
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                            <div class="info">
+                                <a href="#" class="d-block">
+                                    @guest
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar Sesión') }}</a>
+                                    @else
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                               document.getElementById('logout-form').submit();">
+                                        Cerrar Sesión
+                                    </a>
+    
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        style="display: none;">
+                                        @csrf
+                                    </form>
+    
+                                    @endguest
+                                </a>
+                            </div>
+                        </div>
+
+                    </li>-->
+                    <!-- Right Side Of Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Authentication Links -->
+                        @guest
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Cerrar Session') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+                    </ul>
+
                     <!-- Notifications Dropdown Menu -->
                     <li class="nav-item dropdown">
                         <a class="nav-link" data-toggle="dropdown" href="#">
@@ -105,30 +164,15 @@
                 <!-- Sidebar -->
                 <div class="sidebar">
                     <!-- Sidebar user panel (optional) -->
-                    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+              
+                      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                        <!-- <div class="image">
                             <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                         </div>-->
-                        <div class="info">
-                            <a href="#" class="d-block">
-                                @guest
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar Sesión') }}</a>
-                                @else
-                                {{ Auth::user()->name }}
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                           document.getElementById('logout-form').submit();">
-                                    Cerrar Sesión
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                    style="display: none;">
-                                    @csrf
-                                </form>
-
-                                @endguest
-                            </a>
-                        </div>
+                    
                     </div>
+              
+                    
 
                     <!-- Sidebar Menu -->
                     <nav class="mt-2">
@@ -141,21 +185,21 @@
                                     <p>Inicio</p>
                                 </a>
                             </li>
-                            @Can('Administrador')
+                       
+                       
                              <li class="nav-item">
                                 <a href="{{url('/personalAcademico')}}"
                                     class="{{ Request::path() === 'personalAcademico' ? 'nav-link active' : 'nav-link' }}">
                                     <i class="nav-icon fas fa-users"></i>
                                     <p>
                                        Registrar Personal Academico
-                                        <?php  $personal_count = DB::table('personal_academicos')->count(); ?>
-                                     <--<span class="right badge badge-danger">{{ $personal_count ?? '0' }}</span>-->
+                                       
                                     </p>
                                 </a>
                             </li>
-                            
+                        
                            
-                            <li class="nav-item">
+                           <!-- <li class="nav-item">
                                 <a href="{{url('roles')}}"
                                     class="{{ Request::path() === 'roles' ? 'nav-link active' : 'nav-link' }}">
                                     <i class="nav-icon fas fa-users"></i>
@@ -163,8 +207,20 @@
                                         Cargos
                                       </p>
                                 </a>
+                            </li>-->
+                            
+                            @can('haveaccess','rola.index')
+                            <li class="nav-item">
+                                <a href="{{url('rola')}}"
+                                    class="{{ Request::path() === 'rola' ? 'nav-link active' : 'nav-link' }}">
+                                    <i class="nav-icon fas fa-user-plus"></i>
+                                    <p>
+                                        Roles
+                                      </p>
+                                </a>
                             </li>
-                            @endCan
+                            @endcan
+              
                       
                         </ul>
                     </nav>
