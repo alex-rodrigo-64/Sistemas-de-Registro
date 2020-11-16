@@ -5,17 +5,16 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('') }}</div>
+                <div class="card-header">{{ __('Bienvenido') }}</div>
 
                 <div class="card-body">
-                  <!--  @if (session('status'))
+                    @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
                     @endif
 
-                    {{ __('Bienvenido!') }}-->
-                   <h1>Bienvenido </h1>
+                    Estas Iniciando Sesion {{$user->name}}!
                 </div>
             </div>
         </div>
