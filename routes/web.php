@@ -34,6 +34,29 @@ Route::resource('usuarios', 'UserController');
 
 Route::resource('personalAcademico', 'PersonalAcademicoController')->middleware('auth');
 
+Route::get('registrarUFC/registrarUnidad', 'RegistrarUFCController@createUnidad')->middleware('auth');
+Route::post('registrarUFC/registrarUnidad', 'RegistrarUFCController@storeUnidad')->middleware('auth');
+Route::get('registrarUFC/{id}/editarUnidad','RegistrarUFCController@editUnidad')->middleware('auth');
+Route::patch('registrarUFC/editarUnidad/{id}','RegistrarUFCController@updateUnidad')->middleware('auth');
+Route::delete('registrarUFC/eliminarUnidad/{id}','RegistrarUFCController@destroyUnidad')->middleware('auth');
+
+
+Route::get('registrarUFC/registrarFacultad', 'RegistrarUFCController@createFacultad')->middleware('auth');
+Route::post('registrarUFC/registrarFacultad', 'RegistrarUFCController@storeFacultad')->middleware('auth');
+Route::get('registrarUFC/{id}/editarFacultad','RegistrarUFCController@editFacultad')->middleware('auth');
+Route::patch('registrarUFC/editarFacultad/{id}','RegistrarUFCController@updateFacultad')->middleware('auth');
+Route::delete('registrarUFC/eliminarFacultad/{id}','RegistrarUFCController@destroyFacultad')->middleware('auth');
+
+
+Route::get('registrarUFC/registrarCarrera', 'RegistrarUFCController@createCarrera')->middleware('auth');
+Route::post('registrarUFC/registrarCarrera', 'RegistrarUFCController@storeCarrera')->middleware('auth');
+Route::get('registrarUFC/{id}/editarCarrera','RegistrarUFCController@editCarrera')->middleware('auth');
+Route::patch('registrarUFC/editarCarrera/{id}','RegistrarUFCController@updateCarrera')->middleware('auth');
+Route::delete('registrarUFC/eliminarCarrera/{id}','RegistrarUFCController@destroyCarrera')->middleware('auth');
+
+
+Route::resource('registrarUFC', 'RegistrarUFCController')->middleware('auth');
+
 Route::get('markAsRead', function(){
     auth()->user()->unreadNotifications->markAsRead();
     return redirect()->back();

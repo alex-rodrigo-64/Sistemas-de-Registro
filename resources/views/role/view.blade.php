@@ -27,7 +27,7 @@
                                 >
                               </div>
 
-                              <div class="form-group">
+                             <!-- <div class="form-group">
                                <input type="text" class="form-control" 
                                id="slug" 
                                placeholder="Slug"
@@ -35,7 +35,7 @@
                                value="{{old('slug', $rola->slug)}}"
                                readonly
                                >
-                              </div>
+                              </div>-->
 
                               <div class="form-group">
                                 <textarea readonly class="form-control" placeholder="description" name="description" id="description" rows="3">{{old('description', $rola->description)}}
@@ -104,9 +104,13 @@
  
                               @endforeach
                               <hr>
-                               
-                              <a class="btn btn-success" href="{{route('rola.edit',$rola->id)}}">Edit</a>
-                              <a class="btn btn-danger" href="{{route('rola.index')}}">Atras</a>
+                               @if ($rola['name']=='admin')
+                                   <a class="btn btn-danger" href="{{route('rola.index')}}">Atras</a>
+                               @else
+                               <a class="btn btn-success" href="{{route('rola.edit',$rola->id)}}">Editar</a>
+                               <a class="btn btn-danger" href="{{route('rola.index')}}">Atras</a>
+                               @endif
+                            
                              
                         </div>
 

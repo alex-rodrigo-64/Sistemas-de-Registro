@@ -17,7 +17,7 @@ class RolaController extends Controller
     {
         
       Gate::authorize('haveaccess','rola.index');
-        $roles = Rola::orderBy('id','Desc')->paginate(2);
+        $roles = Rola::orderBy('id','Desc')->paginate(4);
 
         return view('role.index',compact('roles'));
     }
@@ -47,8 +47,8 @@ class RolaController extends Controller
     {
         Gate::authorize('haveaccess','rola.create');
         $request->validate([
-            'name'        => 'required|max:50|unique:rolas,name',
-            'slug'        => 'required|max:50|unique:rolas,slug',
+            'name'        => 'required|alpha|max:50|unique:rolas,name',
+          //  'slug'        => 'required|max:50|unique:rolas,slug',
             'full-access' => 'required|in:yes,no'
         ]);
         $role = Rola::create($request->all());
@@ -124,8 +124,8 @@ class RolaController extends Controller
     {
         $this->authorize('haveaccess','rola.edit');  
         $request->validate([
-            'name'        => 'required|max:50|unique:rolas,name,'.$rola->id,
-            'slug'        => 'required|max:50|unique:rolas,slug,'.$rola->id,
+            'name'        => 'required|alpha|max:50|unique:rolas,name,'.$rola->id,
+            //'slug'        => 'required|max:50|unique:rolas,slug,'.$rola->id,
             'full-access' => 'required|in:yes,no'
         ]);
         $rola->update($request->all());

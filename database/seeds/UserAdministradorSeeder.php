@@ -62,7 +62,7 @@ class UserAdministradorSeeder extends Seeder
           //rol admin
          $roladmin= Rola::create([
           'name' => 'admin',
-          'slug' => 'admin',
+          //'slug' => 'admin',
           'description' => 'administrador',
            'full-access' => 'yes'
   
@@ -76,9 +76,9 @@ class UserAdministradorSeeder extends Seeder
 
             
              $permission = Permission::create([
-              'name' => 'List role',
+              'name' => 'Lista de Roles',
               'slug' => 'rola.index',
-              'description' => 'A user can List role',
+              'description' => 'Usted puede ver la lista de Roles',
             ]);
             $permission_all[] = $permission->id;
 
@@ -86,74 +86,38 @@ class UserAdministradorSeeder extends Seeder
              
 
             $permission = Permission::create([
-            'name' => 'show role',
+            'name' => 'Ver Rol',
             'slug' => 'rola.show',
-            'description' => 'A user can see role',
+            'description' => 'Usted puede ver un Rol',
             ]);
             $permission_all[] = $permission->id;
 
             $permission = Permission::create([
-              'name' => 'Create role',
+              'name' => 'Crear Rol',
               'slug' => 'rola.create',
-              'description' => 'A user can create role',
+              'description' => 'Usted puede crear un Roles',
               ]);
               $permission_all[] = $permission->id;
 
             $permission = Permission::create([
-            'name' => 'edit role',
+            'name' => 'Editar Rol',
             'slug' => 'rola.edit',
-            'description' => 'A user can edit role',
+            'description' => 'Usted puede Editar un Roles',
             ]);
             $permission_all[] = $permission->id;
 
             $permission = Permission::create([
-            'name' => 'destroy role',
+            'name' => 'Emilinar Roles',
             'slug' => 'rola.destroy',
-            'description' => 'A user can destroy role',
+            'description' => 'Usted puede Eliminar un Rol',
             ]);
             $permission_all[] = $permission->id;
             
 
             //permisos_para los user
-            $permission = Permission::create([
-              'name' => 'List user',
-              'slug' => 'user.index',
-              'description' => 'A user can List role',
-            ]);
-            $permission_all[] = $permission->id;
-
-
-             
-
-            $permission = Permission::create([
-            'name' => 'show user',
-            'slug' => 'user.show',
-            'description' => 'A user can see user',
-            ]);
-            $permission_all[] = $permission->id;
-
-            /*
-            $permission = Permission::create([
-              'name' => 'Create user',
-              'slug' => 'user.create',
-              'description' => 'A user can create user',
-              ]);
-              $permission_all[] = $permission->id;
-              */
-
-            $permission = Permission::create([
-            'name' => 'edit user',
-            'slug' => 'user.edit',
-            'description' => 'A user can edit user',
-            ]);
-            $permission_all[] = $permission->id;
-
-            $permission = Permission::create([
-            'name' => 'destroy user',
-            'slug' => 'user.destroy',
-            'description' => 'A user can destroy user',
-            ]);
-            $permission_all[] = $permission->id;
+           
+              //Vacio
+            
        
              // Permisos de las rotes  Permisos Personal Academico
             $permission = Permission::create([
@@ -172,10 +136,41 @@ class UserAdministradorSeeder extends Seeder
 
                 $permission = Permission::create([
                   'name' => 'Crear personal Academico',
-                  'slug' => 'personalAcademico.personalAcademico.create',
+                  'slug' => 'personalAcademico.create',
                   'description' => 'Usted puede Crear Personal Academico',
                   ]);
                   $permission_all[] = $permission->id;
+
+              //Permisos para Unidad ,Faculdad y Carrera
+              
+              $permission = Permission::create([
+                'name' => 'Registrar Unidad Faculdad Carrera',
+                'slug' => 'registrarUFC.index',
+                'description' => 'Usted puede Registrar UFC',
+                ]);
+                $permission_all[] = $permission->id;
+
+                
+                $permission = Permission::create([
+                  'name' => 'Registrar Unidad ',
+                  'slug' => 'registrarUFC/registrarUnidad',
+                  'description' => 'Usted puede Registrar Unidad',
+                  ]);
+                  $permission_all[] = $permission->id;
+
+                  $permission = Permission::create([
+                    'name' => 'Registrar Faculdad ',
+                    'slug' => 'registrarUFC/registrarFacultad',
+                    'description' => 'Usted puede Registrar  una o mas faculdades',
+                    ]);
+                    $permission_all[] = $permission->id;
+
+                    $permission = Permission::create([
+                      'name' => 'Registrar Carrera ',
+                      'slug' => 'registrarUFC/registrarCarrera',
+                      'description' => 'Usted puede Registrar una mas Carreras',
+                      ]);
+                      $permission_all[] = $permission->id;
       //table permission_rola
      // $roladmin->permissions()->sync( $permission_all );
         

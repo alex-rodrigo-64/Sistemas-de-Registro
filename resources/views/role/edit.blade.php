@@ -15,28 +15,28 @@
                         @method('PUT') 
                         
                         <div class="container">
-                            <h3>Require Data</h3>
+                            <!--<h3>Campos Requridos</h3>-->
 
                                <div class="form-group">
                                 <input type="text" class="form-control" 
                                 id="name" 
-                                placeholder="name"
+                                placeholder="Nombre"
                                 name="name"
                                 value="{{old('name', $rola->name)}}"
                                 >
                               </div>
 
-                              <div class="form-group">
+                              <!--<div class="form-group">
                                <input type="text" class="form-control" 
                                id="slug" 
                                placeholder="Slug"
                                name="slug"
                                value="{{old('slug', $rola->slug)}}"
                                >
-                              </div>
+                              </div>-->
 
                               <div class="form-group">
-                                <textarea class="form-control" placeholder="description" name="description" id="description" rows="3">{{old('description', $rola->description)}}
+                                <textarea class="form-control" placeholder="Descripcion" name="description" id="description" rows="3">{{old('description', $rola->description)}}
                               </textarea>
                               </div>
 

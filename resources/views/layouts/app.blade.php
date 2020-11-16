@@ -186,18 +186,30 @@
                                 </a>
                             </li>
                        
-                       
-                             <li class="nav-item">
+                            @can('haveaccess','personalAcademico.index')
+                            <li class="nav-item">
                                 <a href="{{url('/personalAcademico')}}"
                                     class="{{ Request::path() === 'personalAcademico' ? 'nav-link active' : 'nav-link' }}">
-                                    <i class="nav-icon fas fa-users"></i>
-                                    <p>
-                                       Registrar Personal Academico
-                                       
-                                    </p>
+                                    <p><i class="nav-icon fas fa-users"></i>
+                                        Registrar Personal 
+                                        <br> <i class="nav-icon fas "></i> Academico
+                                      </p>
                                 </a>
                             </li>
-                        
+                            @endcan
+
+                            
+                            @can('haveaccess','registrarUFC.index')
+                            <li class="nav-item">
+                                <a href="{{url('/registrarUFC')}}"
+                                    class="{{ Request::path() === 'registrarUFC' ? 'nav-link active' : 'nav-link' }}">
+                                    <p><i class="nav-icon fas fa-university"></i>
+                                        Registrar Unidad 
+                                        <br> <i class="nav-icon fas "></i> Facultad Carrera
+                                      </p>
+                                </a>
+                            </li>
+                            @endcan
                            
                            <!-- <li class="nav-item">
                                 <a href="{{url('roles')}}"

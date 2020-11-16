@@ -24,7 +24,7 @@
                           <tr>
                             <th scope="col">#</th>
                             <th scope="col">Nombre</th>
-                            <th scope="col">slug</th>
+                            <!--<th scope="col">slug</th>-->
                             <th scope="col">Descripcion</th>
                             <th scope="col">Acceso Completo</th>
                             <th colspan="3"></th>
@@ -37,19 +37,33 @@
                              <tr>
                              <th scope="row">{{$role->id}}</th>
                              <td>{{$role->name}}</td>
-                             <td>{{$role->slug}}</td>
+                             <!--<td>{{$role->slug}}</td>-->
                              <td>{{$role->description}}</td>
                              <td>{{$role['full-access']}}</td>  
+
+                             @if ($role->name=='admin')
+                                 <td><a class="btn btn-default" href="{{ route('rola.show',$role->id)}}">
+                               Ver</a></td>
+                             @else
+                             @can('haveaccess','rola.show')
                              <td><a class="btn btn-default" href="{{ route('rola.show',$role->id)}}">
-                               show</a></td>
+                               Ver</a></td>
+                               @endcan 
+                               @can('haveaccess','rola.edit')
                              <td><a class="btn btn-success" href="{{ route('rola.edit',$role->id)}}">
                                Editar</a></td>
-                             <td>
+                               @endcan 
+                              <td>
+                               @can('haveaccess','rola.destroy')
                                <form action="{{ route('rola.destroy',$role->id)}}" method="POST">
                                  @csrf
                                  @method('DELETE')
                                  <button class="btn btn-danger">Eliminar</button>
                                </form>
+                               @endcan 
+                                 
+                             @endif
+                            
                              
                             </tr>
                              @endforeach

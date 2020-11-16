@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRolasTable extends Migration
+class CreateRegistrarUnidadsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateRolasTable extends Migration
      */
     public function up()
     {
-        Schema::create('rolas', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->unique();
-            //$table->string('slug')->unique();
-            $table->text('description')->nullable();
-            $table->enum('full-access',['yes','no'])->nullable();
-
+        Schema::create('registrar_unidads', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('nombre');
+            $table->string('telefono');
+            $table->string('correo');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateRolasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rolas');
+        Schema::dropIfExists('registrar_unidads');
     }
 }
